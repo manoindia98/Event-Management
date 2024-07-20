@@ -7,6 +7,9 @@ import { FlipWords } from "./ui/flip-words";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { ModeToggle } from "./themetoggler"
+import Image from 'next/image'
+import logo from './logo.jpg'
+import { BentoGridDemo } from "./grid";
 
 function Homepage() {
   const words = ["Advertise_Smarter", "Reach_Further", "Grow_Bigger", "Do_Better","Promote_Everywhere"];
@@ -16,11 +19,21 @@ function Homepage() {
 
     <header className="w-full text-foreground shadow fixed bg-accent z-10 border-b-2">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="#" className="text-2xl font-bold" prefetch={false}>
+        <div className="flex flex-row">
+        <Image
+          className="rounded-full lg:ml-10 sm:ml-2"
+          src={logo}
+          width={50}
+          height={50}
+          alt="Picture of the author"
+          />
+        <Link href="#" className="text-2xl font-bold ml-2 my-auto" prefetch={false}>
           Manoindia
         </Link>
+        </div>
+      
         <nav className="hidden md:flex">
-          <ul className="flex items-center space-x-6 font-bold">
+          {/* <ul className="flex items-center space-x-6 font-bold">
             <li>
               <Link href="#" className="hover:text-primary" prefetch={false}>
                 Home
@@ -51,10 +64,13 @@ function Homepage() {
                 Contact
               </Link>
             </li>
-          </ul>
+          </ul> */}
         </nav>
-        <div className="pl-[8rem] ml-[8vw]"><ModeToggle /></div>
+        <div className="flex flex-row justify-evenly">
+        <div className=""><ModeToggle /></div>
         <Button className="hidden md:inline-flex">Get Started</Button>
+        </div>
+        
         
         <Sheet>
           <SheetTrigger asChild>
@@ -243,7 +259,7 @@ function Homepage() {
           </div>
         </section>
     </section>
-
+<BentoGridDemo />
 {/* TESTIMONIALS SECTION */}
     <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
