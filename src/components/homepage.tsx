@@ -68,7 +68,8 @@ function Homepage() {
         </nav>
         <div className="flex flex-row justify-evenly">
         <div className=""><ModeToggle /></div>
-        <Button className="hidden md:inline-flex">Get Started</Button>
+        <Link href="/login" ><Button className="hidden md:inline-flex">Get Started</Button></Link>
+        
         </div>
         
         
@@ -125,7 +126,7 @@ function Homepage() {
         </div>
         
         <Link
-          href="#"
+          href="/login"
           className="inline-flex mt-6 h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
           prefetch={false}
         >
