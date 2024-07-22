@@ -1,6 +1,5 @@
 "use client"
 import React from 'react'
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "../../components/ui/collapsible"
 import Link from "next/link"
 import { Button } from '../../components/ui/button'
 import { Sheet, SheetTrigger, SheetContent } from "../../components/ui/sheet"
@@ -12,6 +11,8 @@ import { IoMdNotifications } from "react-icons/io";
 import { IoHome } from "react-icons/io5";
 import { FaNewspaper } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
+import { BsCalendarEventFill } from "react-icons/bs";
+import { FaAd } from "react-icons/fa";
 import { useRouter } from 'next/navigation'
 
 
@@ -124,6 +125,8 @@ export default function DashboardLayout({
       <div className='w-full text-foreground shadow fixed bg-accent z-10 border-b-2  bottom-0'>
         <div className='container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8'>
         <Button variant="ghost" onClick={()=> router.push('/dashboard')}> <IoHome color='#dfcaa7' size="2rem"/></Button>
+        <Button variant="ghost" onClick={()=> router.push('/ads')}> <FaAd color='#dfcaa7' size="2rem"/></Button>
+        <Button variant="ghost" onClick={()=> router.push('/dashboard/managment')} > <BsCalendarEventFill color='#dfcaa7' size="2rem" /></Button>
         <Button variant="ghost" onClick={()=> router.push('/dashboard/blog')} > <FaNewspaper color='#dfcaa7' size="2rem" /></Button>
         <Button variant="ghost" onClick={()=> router.push('/dashboard/user')}> <FaUser color='#dfcaa7' size="2rem" /></Button>
         </div>
