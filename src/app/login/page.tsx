@@ -1,11 +1,14 @@
+"use client"
 import { Label } from "../../components/ui/label"
 import { Input } from "../../components/ui/input"
 import { Button } from "../../components/ui/button"
 import { Separator } from "../../components/ui/separator"
+import { useRouter } from 'next/navigation'
 import React from "react"
 import Link from "next/link"
 
 export default function Page() {
+    const router = useRouter()
   return (
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-md space-y-6">
@@ -22,7 +25,7 @@ export default function Page() {
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" required />
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" onClick={() => router.push('/dashboard')} className="w-full">
             Sign in
           </Button>
         </div>
