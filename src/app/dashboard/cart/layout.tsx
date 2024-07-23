@@ -9,9 +9,15 @@ export default function CartLayout({
   return (
     <section>
       {/* Include shared UI here e.g. a header or sidebar */}
-      <div>header</div>
+      <div className='fixed w-full bg-accent h-[4rem] top-0'>
+        Your Purchase
+      </div>
+        <div className='mt-[5rem]'>
         {children}
-      <div>footer</div>
+        </div>
+      <div className='fixed w-full bg-accent h-[4rem] bottom-0'>
+        Checkout
+      </div>
     </section>
   )
 }

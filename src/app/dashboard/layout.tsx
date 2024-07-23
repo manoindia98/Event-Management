@@ -14,6 +14,8 @@ import { FaUser } from "react-icons/fa";
 import { BsCalendarEventFill } from "react-icons/bs";
 import { FaAd } from "react-icons/fa";
 import { useRouter } from 'next/navigation'
+import CartLayout from './cart/layout'
+import page from './cart/page'
 
 
 
@@ -93,26 +95,7 @@ export default function DashboardLayout({
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
-            <div className="grid gap-4 p-4">
-              <Link href="#" className="font-medium hover:text-primary" prefetch={false}>
-                Home
-              </Link>
-              <Link href="#features" className="font-medium hover:text-primary" prefetch={false}>
-                Features
-              </Link>
-              <Link href="#howitworks" className="font-medium hover:text-primary" prefetch={false}>
-                How It Works
-              </Link>
-              <Link href="#pricing" className="font-medium hover:text-primary" prefetch={false}>
-                Pricing
-              </Link>
-              <Link href="#faq" className="font-medium hover:text-primary" prefetch={false}>
-                FAQ
-              </Link>
-              <Link href="#" className="font-medium hover:text-primary" prefetch={false}>
-                Contact
-              </Link>
-            </div>
+            <CartLayout children={page()} />
           </SheetContent>
         </Sheet>
       </div>
@@ -125,7 +108,7 @@ export default function DashboardLayout({
       <div className='w-full text-foreground shadow fixed bg-accent z-10 border-b-2  bottom-0'>
         <div className='container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8'>
         <Button variant="ghost" onClick={()=> router.push('/dashboard')}> <IoHome color='#dfcaa7' size="2rem"/></Button>
-        <Button variant="ghost" onClick={()=> router.push('/ads')}> <FaAd color='#dfcaa7' size="2rem"/></Button>
+        <Button variant="ghost" onClick={()=> router.push('/dashboard/ads')}> <FaAd color='#dfcaa7' size="2rem"/></Button>
         <Button variant="ghost" onClick={()=> router.push('/dashboard/managment')} > <BsCalendarEventFill color='#dfcaa7' size="2rem" /></Button>
         <Button variant="ghost" onClick={()=> router.push('/dashboard/blog')} > <FaNewspaper color='#dfcaa7' size="2rem" /></Button>
         <Button variant="ghost" onClick={()=> router.push('/dashboard/user')}> <FaUser color='#dfcaa7' size="2rem" /></Button>
