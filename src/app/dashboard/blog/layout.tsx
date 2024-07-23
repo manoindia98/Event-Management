@@ -9,9 +9,9 @@ export default function BlogLayout({
   return (
     <section>
       {/* Include shared UI here e.g. a header or sidebar */}
-      <div>header</div>
+      <div>Top Artists status</div>
         {children}
-      <div>footer</div>
+      
     </section>
   )
 }
