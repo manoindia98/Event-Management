@@ -2,7 +2,9 @@ import React from 'react'
 
 function page() {
   return (
-    <div>Blog Page</div>
+    <>
+      <div>Blogs</div>
+    </>
   )
 }
 

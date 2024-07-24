@@ -9,9 +9,9 @@ export default function AdsLayout({
   return (
     <section>
       {/* Include shared UI here e.g. a header or sidebar */}
-      <div>header</div>
+      {/* <div>header</div> */}
         {children}
-      <div>footer</div>
+      {/* <div>footer</div> */}
     </section>
   )
 }
