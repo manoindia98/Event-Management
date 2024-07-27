@@ -103,7 +103,7 @@ export default function DashboardLayout({
       </div>
       
     </header>
-    <div className='flex flex-row justify-between mx-auto'>
+    <div className='flex flex-row justify-between mx-auto '>
       <div className='hidden mt-[8rem] lg:block lg:w-[20vw] min-w-[20rem]  m-5 fixed'>
         <Card className='h-[85vh] flex flex-col justify-start p-5'>
   
@@ -122,7 +122,7 @@ export default function DashboardLayout({
       </div>
       <div className='hidden mt-[8rem] lg:block lg:w-[20vw] min-w-[20rem] m-5'></div>
 
-       <div className='w-full lg:w-[76vw] lg:pr-[10rem]  pt-[6rem] z-0'>
+       <div className='w-full lg:w-[76vw] lg:pr-[10rem]  pt-[6rem] z-0 overflow-hidden'>
       {children}
     
     </div>
