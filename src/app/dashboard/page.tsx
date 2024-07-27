@@ -10,6 +10,7 @@ import {
 } from "../../components/ui/card"
 import { Input } from "../../components/ui/input"
 import { Label } from "../../components/ui/label"
+import { AppleCardsCarouselDemo } from '@/components/AppleCardsCarouselDemo'
 
 
 function page() {
@@ -60,12 +61,12 @@ function page() {
       </div>
       <div className='my-8 mx-4'>
       <Card className="w-full">
-        <CardHeader>
+        {/* <CardHeader>
           <CardTitle>Know our top Artists</CardTitle>
           <CardDescription>Top trending artists and their works</CardDescription>
-        </CardHeader>
+        </CardHeader> */}
         <CardContent>
-          
+          <AppleCardsCarouselDemo />
         </CardContent>
         <CardFooter className="flex justify-between">
           

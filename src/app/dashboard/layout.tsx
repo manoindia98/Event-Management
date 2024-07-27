@@ -16,6 +16,8 @@ import { FaAd } from "react-icons/fa";
 import { useRouter } from 'next/navigation'
 import CartLayout from './cart/layout'
 import page from './cart/page'
+import { Card } from '@/components/ui/card'
+
 
 
 
@@ -25,7 +27,9 @@ export default function DashboardLayout({
   children: React.ReactNode
 })
   
-{ const router = useRouter()
+{ 
+  const router = useRouter();
+  
   return (
     <section>
       {/* Include shared UI here e.g. a header or sidebar */}
@@ -78,15 +82,13 @@ export default function DashboardLayout({
             </li>
           </ul> */}
         </nav>
-        <div className="flex flex-row justify-evenly">
-        {/* <div className=""><ModeToggle /></div> */}
-        <Button variant="ghost"><IoMdNotifications color='#dfcaa7'size="2rem" className='mr-4'/></Button>
-        
-        
-        
+
+
+        <div className="ml-auto mr-3">
+        <ModeToggle />        
         </div>
         
-        
+       
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon">
@@ -101,11 +103,33 @@ export default function DashboardLayout({
       </div>
       
     </header>
-    <div className='w-full pt-[6rem]'>
-    {children}
-    </div>
+    <div className='flex flex-row justify-between mx-auto'>
+      <div className='hidden mt-[8rem] lg:block w-[28rem] m-5 fixed'>
+        <Card className='h-[85vh] flex flex-col justify-start p-5'>
+  
+        <Button className=' justify-start my-4 h-auto' variant="ghost" onClick={()=> router.push('/dashboard')}> <IoHome className='mr-5' color='#dfcaa7' size="2rem"/>HOME</Button>
+
+        <Button className=' justify-start my-4 h-auto' variant="ghost" onClick={()=> router.push('/dashboard/ads')}> <FaAd className='mr-5' color='#dfcaa7' size="2rem"/>BUY AD/PROMO</Button>
+
+        <Button className=' justify-start my-4 h-auto' variant="ghost" onClick={()=> router.push('/dashboard/managment')} > <BsCalendarEventFill className='mr-5' color='#dfcaa7' size="2rem" />BOOK ARTIST</Button>
+
+        <Button className=' justify-start my-4 h-auto' variant="ghost" onClick={()=> router.push('/dashboard/blog')} > <FaNewspaper className='mr-5' color='#dfcaa7' size="2rem" />READ BLOGS</Button>
+
+        <Button className=' justify-start my-4 h-auto' variant="ghost" onClick={()=> router.push('/dashboard/user')}> <FaUser className='mr-5' color='#dfcaa7' size="2rem" />PROFILE</Button>
+        </Card>
         
-      <div className='w-full text-foreground shadow fixed bg-accent z-10 border-b-2  bottom-0'>
+
+      </div>
+      <div className='hidden mt-[8rem] lg:block w-[36rem] m-5'></div>
+
+       <div className='w-full pt-[6rem] z-0'>
+      {children}
+    
+    </div>
+    </div>
+    
+        
+      <div className='lg:hidden w-full text-foreground shadow fixed bg-accent z-10 border-b-2  bottom-0'>
         <div className='container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8'>
         <Button variant="ghost" onClick={()=> router.push('/dashboard')}> <IoHome color='#dfcaa7' size="2rem"/></Button>
         <Button variant="ghost" onClick={()=> router.push('/dashboard/ads')}> <FaAd color='#dfcaa7' size="2rem"/></Button>
