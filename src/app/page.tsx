@@ -16,7 +16,8 @@ export default function Home() {
   return (
     <main>
       {loading ? <SplashScreen finishLoading={finishLoading} /> : null}
-      <Homepage />
+      {loading ? null : <Homepage />}
+      
      
     </main>
   );
