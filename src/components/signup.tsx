@@ -19,7 +19,6 @@ export function Signup() {
             <Label htmlFor="username">Username</Label>
             <Input id="username" type="text" placeholder="john_doe" required />
           </div>
-          </div>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
@@ -53,7 +52,7 @@ export function Signup() {
           </Button>
           <div className="text-center text-sm">
             Already have an account?{" "}
-            <Link href="/login" className="underline" prefetch={false}>
+            <Link href="/Login" className="underline" prefetch={false}>
               Sign in
             </Link>
           </div>
