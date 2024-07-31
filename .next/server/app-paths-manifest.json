@@ -1,10 +1,3 @@
 {
-  "/page": "app/page.js",
-  "/(auth)/sign-in/[[...sign-in]]/page": "app/(auth)/sign-in/[[...sign-in]]/page.js",
-  "/[...not_found]/page": "app/[...not_found]/page.js",
-  "/(root)/(home)/dashboard/page": "app/(root)/(home)/dashboard/page.js",
-  "/(root)/(home)/ads/page": "app/(root)/(home)/ads/page.js",
-  "/(root)/(home)/managment/page": "app/(root)/(home)/managment/page.js",
-  "/(root)/(home)/blog/page": "app/(root)/(home)/blog/page.js",
-  "/(root)/(home)/user/page": "app/(root)/(home)/user/page.js"
+  "/page": "app/page.js"
 }
