@@ -67,8 +67,7 @@ export default function Page() {
                 value={email}
                 onChange={handleOnChange}
                 type="email"
-                placeholder="abc@example.com"
-              required/>
+                placeholder="abc@example.com" />
           </div>
           <div className="space-y-2 relative">
             <Label htmlFor="password">Password</Label>
