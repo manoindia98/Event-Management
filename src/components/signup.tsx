@@ -16,11 +16,6 @@ export function Signup() {
         </div>
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="username">Username</Label>
-            <Input id="username" type="text" placeholder="john_doe" required />
-          </div>
-        <div className="space-y-4">
-          <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <Input id="name" type="text" placeholder="John Doe" required />
           </div>
