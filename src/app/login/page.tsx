@@ -4,10 +4,52 @@ import { Input } from "../../components/ui/input"
 import { Button } from "../../components/ui/button"
 import { Separator } from "../../components/ui/separator"
 import { useRouter } from 'next/navigation'
-import React from "react"
+import React,{useState} from "react"
 import Link from "next/link"
+import toast from "react-hot-toast"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
+
+interface FormData {
+  email: string;
+  password: string;
+}
 
 export default function Page() {
+ 
+  const [formData, setFormData] = useState<FormData>({
+    email: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { email, password} = formData;
+
+  const handleOnChange = (e: any) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleOnSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+  
+    // Navigate to another route
+    // navigate("/dashboard");
+    router.push("/dashboard"); // Navigates to the "/dashboard" route
+
+
+    // Reset the form data
+    setFormData({
+      email: "",
+      password: "",
+
+    });
+
+  }
     const router = useRouter()
   return (
     <div className="flex min-h-[100dvh] flex-col items-center justify-center bg-background px-4 py-12 sm:px-6 lg:px-8">
@@ -16,19 +58,52 @@ export default function Page() {
           <h1 className="text-3xl font-bold">Welcome back</h1>
           <p className="text-muted-foreground">Sign in to your account to continue</p>
         </div>
+        <form onSubmit={handleOnSubmit}>
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" required />
+            <Input id="email"
+                name="email"
+                value={email}
+                onChange={handleOnChange}
+                type="email"
+                placeholder="abc@example.com"
+              required/>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2 relative">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required />
+            <Input id="password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={password}
+                onChange={handleOnChange}
+                required />
+                <span
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-[32px] z-[10] cursor-pointer"
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+              ) : (
+                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+              )}
+            </span>
+            <span
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3 top-[32px] z-[10] cursor-pointer"
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+              ) : (
+                <AiOutlineEye fontSize={24} fill="#AFB2BF" />
+              )}
+            </span>
           </div>
-          <Button type="submit" onClick={() => router.push('/dashboard')} className="w-full">
+          <Button type="submit"  className="w-full">
             Sign in
           </Button>
         </div>
+        </form>
         <Separator className="my-8" />
         <div className="space-y-4">
           <Button variant="outline" className="w-full">
