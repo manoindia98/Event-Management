@@ -1,143 +1,139 @@
-import Link from "next/link"
-import React from "react";
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { FlipWords } from "./ui/flip-words";
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
-import { ModeToggle } from "./themetoggler"
-import Image from 'next/image'
-import logo from './logo.jpg'
+"use client";
+
+import logo from './logo.jpg';
+import Link from "next/link";
+import Image from 'next/image';
+import React, { useState } from "react";
 import { BentoGridDemo } from "./grid";
+import { ModeToggle } from "./themetoggler";
+import { useRouter } from 'next/navigation';
+import { FlipWords } from "./ui/flip-words";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { MultiStepLoader as Loader } from "./ui/multi-step-loader";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible";
+
+
+const loadingStates = [
+  {
+    text: "Setting Up Enviornment",
+  },
+  {
+    text: "Authenticating",
+  },
+  {
+    text: "Searching Account",
+  },
+  {
+    text: "Logging In",
+  },
+  {
+    text: "Building Page",
+  },
+  {
+    text: "** Welcome To ManoIndia **",
+  },
+  {
+    text: "** LOADING **",
+  },
+  {
+    text: "** LOADING **",
+  },
+  {
+    text: "** LOADING **",
+  },
+  {
+    text: "** LOADING **",
+  },
+  {
+    text: "** LOADING **",
+  },
+
+];
+
+export const asyncTimeout = (ms: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};
+
+
 
 function Homepage() {
-  const words = ["Advertise_Smarter", "Reach_Further", "Grow_Bigger", "Do_Better","Promote_Everywhere"];
+  const [loading, setLoading] = useState(false);
+  const words = ["Advertise_Smarter", "Reach_Further", "Grow_Bigger", "Do_Better", "Promote_Everywhere"];
+  const router = useRouter();
   return (
     <>
-{/* HEADER SECTION */}
+      {/* HEADER SECTION */}
+      <Loader loadingStates={loadingStates} loading={loading} duration={500} />
+      <header className="w-full text-foreground shadow fixed bg-accent z-10 border-b-2">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-row">
+            <Image
+              className="rounded-full lg:ml-10 sm:ml-2"
+              src={logo}
+              width={50}
+              height={50}
+              alt="Picture of the author"
+            />
+            <Link href="#" className="text-2xl font-bold ml-2 my-auto" prefetch={false}>
+              Manoindia
+            </Link>
+          </div>
 
-    <header className="w-full text-foreground shadow fixed bg-accent z-10 border-b-2">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-row">
-        <Image
-          className="rounded-full lg:ml-10 sm:ml-2"
-          src={logo}
-          width={50}
-          height={50}
-          alt="Picture of the author"
-          />
-        <Link href="#" className="text-2xl font-bold ml-2 my-auto" prefetch={false}>
-          Manoindia
-        </Link>
-        </div>
-      
-        <nav className="hidden md:flex">
-          {/* <ul className="flex items-center space-x-6 font-bold">
-            <li>
-              <Link href="#" className="hover:text-primary" prefetch={false}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="#features" className="hover:text-primary" prefetch={false}>
-                Features
-              </Link>
-            </li>
-            <li>
-              <Link href="#howitworks" className="hover:text-primary" prefetch={false}>
-                How It Works
-              </Link>
-            </li>
-            <li>
-              <Link href="#pricing" className="hover:text-primary" prefetch={false}>
-                Pricing
-              </Link>
-            </li>
-            <li>
-              <Link href="#faq" className="hover:text-primary" prefetch={false}>
-                FAQ
-              </Link>
-            </li>
-            <li>
-              <Link href="#" className="hover:text-primary" prefetch={false}>
-                Contact
-              </Link>
-            </li>
-          </ul> */}
-        </nav>
-        <div className="flex flex-row justify-evenly">
-        <div className=""><ModeToggle /></div>
-        <Link href="/login" ><Button className="hidden md:inline-flex">Get Started</Button></Link>
-        
-        </div>
-        
-        
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="md:hidden">
-              <MenuIcon className="h-6 w-6" />
-              <span className="sr-only">Toggle navigation menu</span>
+          <div className="flex flex-row justify-evenly">
+            <div className=""><ModeToggle /></div>
+
+            <Button onClick={async () => {
+              setLoading(true)
+              router.push("/dashboard")
+              await asyncTimeout(4000);
+              setLoading(false);
+            }} className="hidden ml-4 md:inline-flex">
+              Create New Account
             </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="md:hidden">
-            <div className="grid gap-4 p-4">
-              <Link href="#" className="font-medium hover:text-primary" prefetch={false}>
-                Home
-              </Link>
-              <Link href="#features" className="font-medium hover:text-primary" prefetch={false}>
-                Features
-              </Link>
-              <Link href="#howitworks" className="font-medium hover:text-primary" prefetch={false}>
-                How It Works
-              </Link>
-              <Link href="#pricing" className="font-medium hover:text-primary" prefetch={false}>
-                Pricing
-              </Link>
-              <Link href="#faq" className="font-medium hover:text-primary" prefetch={false}>
-                FAQ
-              </Link>
-              <Link href="#" className="font-medium hover:text-primary" prefetch={false}>
-                Contact
-              </Link>
-            </div>
-          </SheetContent>
-        </Sheet>
-      </div>
-      
-    </header>
 
-{/* HERO SECTION */}
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary to-secondary">
-      <div className="w-full h-8"></div>
-      <div className="container px-4 md:px-6 flex flex-col items-center text-center">
-        <div className="space-y-4">
-          <h1 className="text-4xl text-left font-bold tracking-tighter text-primary-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          </div>
+
+        </div>
+
+      </header>
+
+      {/* HERO SECTION */}
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary to-secondary">
+        <div className="w-full h-8"></div>
+        <div className="container px-4 md:px-6 flex flex-col items-center text-center">
+          <div className="space-y-4">
+            <h1 className="text-4xl text-left font-bold tracking-tighter text-primary-foreground sm:text-5xl md:text-6xl lg:text-7xl">
               <FlipWords className="text-accent dark:text-[white] z-12" words={words} />
               <br />
               <div className="ml-2">
                 with Manoindia
               </div>
-              
-          </h1>
-          <p className="max-w-[800px] text-xl text-primary-foreground md:text-2xl">
-            Your One-Stop Platform for Promoting, Advertising and Space Renting
-          </p>
-        </div>
-        
-        <Link
-          href="/login"
-          className="inline-flex mt-6 h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-          prefetch={false}
-        >
-          Get Started
-        </Link>
-      </div>
-    </section>
 
-{/* FEATURES SECTION */}
-    <section className="w-full py-12 md:py-24 lg:py-32" id="features">
-      <section className="w-full mx-auto mb-10 max-w-4xl p-8 bg-white rounded-lg shadow-md dark:bg-secondary">
+            </h1>
+            <p className="max-w-[800px] text-xl text-primary-foreground md:text-2xl">
+              Your One-Stop Platform for Promoting, Advertising and Space Renting
+            </p>
+          </div>
+          <Button onClick={async () => {
+            setLoading(true)
+            router.push("/dashboard")
+            await asyncTimeout(4000);
+            setLoading(false);
+          }} className="inline-flex mt-6 h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+            Get Started
+          </Button>
+
+
+        </div>
+      </section>
+
+      {/* FEATURES SECTION */}
+      <section className="w-full py-12 md:py-24 lg:py-32" id="features">
+        <section className="w-full mx-auto mb-10 max-w-4xl p-8 bg-white rounded-lg shadow-md dark:bg-secondary">
           <div className="grid grid-cols-3 gap-8 mt-6">
             <div className="flex flex-col items-center text-center">
               <RocketIcon className="w-12 h-12 text-primary" />
@@ -156,84 +152,84 @@ function Homepage() {
             </div>
           </div>
         </section>
-      <div className="container grid gap-12 px-4 md:px-6">
-        <div className="grid gap-6 md:grid-cols-2 lg:gap-12">
-          <div className="space-y-4">
-            <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">For Advertisers</div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Reach Your Target Audience</h2>
-            <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Leverage our platform to connect with the right people and achieve your advertising goals.
-            </p>
-            <ul className="grid gap-6">
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Targeted Advertising</h3>
-                  <p className="text-muted-foreground">
-                    Precisely target your ads to the right audience based on demographics, interests, and behaviors.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Real-Time Analytics</h3>
-                  <p className="text-muted-foreground">
-                    Monitor the performance of your ads in real-time and make data-driven decisions to optimize your
-                    campaigns.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Flexible Pricing</h3>
-                  <p className="text-muted-foreground">
-                    Choose from a variety of pricing models, including pay-per-click and cost-per-impression, to fit
-                    your advertising budget.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div className="space-y-4">
-            <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">For Space Providers</div>
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Maximize Your Advertising Revenue
-            </h2>
-            <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              Unlock the full potential of your advertising space and generate more revenue with our platform.
-            </p>
-            <ul className="grid gap-6">
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Automated Monetization</h3>
-                  <p className="text-muted-foreground">
-                    Our platform automatically matches your ad space with relevant advertisers, ensuring maximum revenue
-                    generation.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Detailed Reporting</h3>
-                  <p className="text-muted-foreground">
-                    Access comprehensive reports on your ad performance, including impressions, clicks, and revenue, to
-                    make informed decisions.
-                  </p>
-                </div>
-              </li>
-              <li>
-                <div className="grid gap-1">
-                  <h3 className="text-xl font-bold">Easy Integration</h3>
-                  <p className="text-muted-foreground">
-                    Seamlessly integrate our platform with your website or mobile app, and start earning from your ad
-                    space in no time.
-                  </p>
-                </div>
-              </li>
-            </ul>
+        <div className="container grid gap-12 px-4 md:px-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:gap-12">
+            <div className="space-y-4">
+              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">For Advertisers</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Reach Your Target Audience</h2>
+              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Leverage our platform to connect with the right people and achieve your advertising goals.
+              </p>
+              <ul className="grid gap-6">
+                <li>
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Targeted Advertising</h3>
+                    <p className="text-muted-foreground">
+                      Precisely target your ads to the right audience based on demographics, interests, and behaviors.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Real-Time Analytics</h3>
+                    <p className="text-muted-foreground">
+                      Monitor the performance of your ads in real-time and make data-driven decisions to optimize your
+                      campaigns.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Flexible Pricing</h3>
+                    <p className="text-muted-foreground">
+                      Choose from a variety of pricing models, including pay-per-click and cost-per-impression, to fit
+                      your advertising budget.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div className="space-y-4">
+              <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">For Space Providers</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+                Maximize Your Advertising Revenue
+              </h2>
+              <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Unlock the full potential of your advertising space and generate more revenue with our platform.
+              </p>
+              <ul className="grid gap-6">
+                <li>
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Automated Monetization</h3>
+                    <p className="text-muted-foreground">
+                      Our platform automatically matches your ad space with relevant advertisers, ensuring maximum revenue
+                      generation.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Detailed Reporting</h3>
+                    <p className="text-muted-foreground">
+                      Access comprehensive reports on your ad performance, including impressions, clicks, and revenue, to
+                      make informed decisions.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="grid gap-1">
+                    <h3 className="text-xl font-bold">Easy Integration</h3>
+                    <p className="text-muted-foreground">
+                      Seamlessly integrate our platform with your website or mobile app, and start earning from your ad
+                      space in no time.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      <section className="w-full max-w-4xl p-8 bg-white rounded-lg shadow-md mx-auto mt-10 dark:bg-secondary">
+        <section className="w-full max-w-4xl p-8 bg-white rounded-lg shadow-md mx-auto mt-10 dark:bg-secondary">
           <div className="flex items-center justify-between">
             <h2 className="text-2xl font-bold">Promote through various channels.</h2>
             <Button variant="outline" size="sm">
@@ -259,165 +255,169 @@ function Homepage() {
             </div>
           </div>
         </section>
-    </section>
-<BentoGridDemo />
-{/* TESTIMONIALS SECTION */}
-    <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
-        <div className="space-y-3">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">What Our Customers Say</h2>
-          <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Hear from real people who love using our product.
-          </p>
+      </section>
+
+
+      <BentoGridDemo />
+
+
+      {/* TESTIMONIALS SECTION */}
+      <section className="w-full py-12 md:py-24 lg:py-32">
+        <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
+          <div className="space-y-3">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">What Our Customers Say</h2>
+            <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Hear from real people who love using our product.
+            </p>
+          </div>
+          <div className="grid w-full max-w-4xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12 border">
+                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-0.5">
+                  <h3 className="text-lg font-semibold">Sarah Johnson</h3>
+                  <div className="flex items-center gap-0.5 text-sm">
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
+                  </div>
+                </div>
+              </div>
+              <div className="text-sm leading-loose text-muted-foreground">
+                <p>
+                  I&apos;ve been using this product for a few months now and I absolutely love it. It&apos;s made my life
+                  so much easier and I would highly recommend it to anyone.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12 border">
+                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-0.5">
+                  <h3 className="text-lg font-semibold">Alex Smith</h3>
+                  <div className="flex items-center gap-0.5 text-sm">
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
+                  </div>
+                </div>
+              </div>
+              <div className="text-sm leading-loose text-muted-foreground">
+                <p>
+                  This product has been a game-changer for my business. The features are top-notch and the customer
+                  support is exceptional. I highly recommend it.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
+              <div className="flex items-center gap-4 ">
+                <Avatar className="h-12 w-12 border">
+                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-0.5">
+                  <h3 className="text-lg font-semibold">Emily Parker</h3>
+                  <div className="flex items-center gap-0.5 text-sm">
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                  </div>
+                </div>
+              </div>
+              <div className="text-sm leading-loose text-muted-foreground">
+                <p>
+                  I&apos;m absolutely thrilled with this product. It&apos;s exceeded all of my expectations and I
+                  can&apos;t imagine using anything else. Highly recommended!
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12 border">
+                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-0.5">
+                  <h3 className="text-lg font-semibold">John Doe</h3>
+                  <div className="flex items-center gap-0.5 text-sm">
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
+                    <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
+                  </div>
+                </div>
+              </div>
+              <div className="text-sm leading-loose text-muted-foreground">
+                <p>
+                  I&apos;ve been using this product for a while now and it&apos;s been a great experience. The team is
+                  responsive and the features are really useful.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12 border">
+                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-0.5">
+                  <h3 className="text-lg font-semibold">Jane Doe</h3>
+                  <div className="flex items-center gap-0.5 text-sm">
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
+                  </div>
+                </div>
+              </div>
+              <div className="text-sm leading-loose text-muted-foreground">
+                <p>
+                  I&apos;m so impressed with this product. It&apos;s made my workflow so much more efficient and I&apos;ve
+                  seen a significant improvement in my productivity.
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12 border">
+                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="grid gap-0.5">
+                  <h3 className="text-lg font-semibold">Michael Johnson</h3>
+                  <div className="flex items-center gap-0.5 text-sm">
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                    <StarIcon className="h-4 w-4 fill-primary" />
+                  </div>
+                </div>
+              </div>
+              <div className="text-sm leading-loose text-muted-foreground">
+                <p>
+                  This product has been a game-changer for my business. The features are top-notch and the customer
+                  support is exceptional. I highly recommend it.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="grid w-full max-w-4xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-12 w-12 border">
-                <AvatarImage src="/placeholder-user.jpg" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <div className="grid gap-0.5">
-                <h3 className="text-lg font-semibold">Sarah Johnson</h3>
-                <div className="flex items-center gap-0.5 text-sm">
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
-                </div>
-              </div>
-            </div>
-            <div className="text-sm leading-loose text-muted-foreground">
-              <p>
-                I&apos;ve been using this product for a few months now and I absolutely love it. It&apos;s made my life
-                so much easier and I would highly recommend it to anyone.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-12 w-12 border">
-                <AvatarImage src="/placeholder-user.jpg" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <div className="grid gap-0.5">
-                <h3 className="text-lg font-semibold">Alex Smith</h3>
-                <div className="flex items-center gap-0.5 text-sm">
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
-                </div>
-              </div>
-            </div>
-            <div className="text-sm leading-loose text-muted-foreground">
-              <p>
-                This product has been a game-changer for my business. The features are top-notch and the customer
-                support is exceptional. I highly recommend it.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
-            <div className="flex items-center gap-4 ">
-              <Avatar className="h-12 w-12 border">
-                <AvatarImage src="/placeholder-user.jpg" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <div className="grid gap-0.5">
-                <h3 className="text-lg font-semibold">Emily Parker</h3>
-                <div className="flex items-center gap-0.5 text-sm">
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                </div>
-              </div>
-            </div>
-            <div className="text-sm leading-loose text-muted-foreground">
-              <p>
-                I&apos;m absolutely thrilled with this product. It&apos;s exceeded all of my expectations and I
-                can&apos;t imagine using anything else. Highly recommended!
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-12 w-12 border">
-                <AvatarImage src="/placeholder-user.jpg" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <div className="grid gap-0.5">
-                <h3 className="text-lg font-semibold">John Doe</h3>
-                <div className="flex items-center gap-0.5 text-sm">
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
-                  <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
-                </div>
-              </div>
-            </div>
-            <div className="text-sm leading-loose text-muted-foreground">
-              <p>
-                I&apos;ve been using this product for a while now and it&apos;s been a great experience. The team is
-                responsive and the features are really useful.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-12 w-12 border">
-                <AvatarImage src="/placeholder-user.jpg" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <div className="grid gap-0.5">
-                <h3 className="text-lg font-semibold">Jane Doe</h3>
-                <div className="flex items-center gap-0.5 text-sm">
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-muted stroke-muted-foreground" />
-                </div>
-              </div>
-            </div>
-            <div className="text-sm leading-loose text-muted-foreground">
-              <p>
-                I&apos;m so impressed with this product. It&apos;s made my workflow so much more efficient and I&apos;ve
-                seen a significant improvement in my productivity.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 rounded-lg bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:bg-secondary">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-12 w-12 border">
-                <AvatarImage src="/placeholder-user.jpg" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <div className="grid gap-0.5">
-                <h3 className="text-lg font-semibold">Michael Johnson</h3>
-                <div className="flex items-center gap-0.5 text-sm">
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                  <StarIcon className="h-4 w-4 fill-primary" />
-                </div>
-              </div>
-            </div>
-            <div className="text-sm leading-loose text-muted-foreground">
-              <p>
-                This product has been a game-changer for my business. The features are top-notch and the customer
-                support is exceptional. I highly recommend it.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <section className="w-full max-w-4xl p-8 bg-white rounded-lg shadow-md mx-auto mt-10 dark:bg-secondary">
+        <section className="w-full max-w-4xl p-8 bg-white rounded-lg shadow-md mx-auto mt-10 dark:bg-secondary">
           <h2 className="text-2xl font-bold">Our Clients</h2>
           <div className="grid grid-cols-4 gap-8 mt-6">
             <div className="flex items-center justify-center p-4 border rounded-lg bg-muted">
@@ -479,185 +479,185 @@ function Homepage() {
             </div>
           </div>
         </section>
-    </section>
+      </section>
 
-{/* CALL TO ACTION SECTION */}
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary to-secondary">
-      <div className="container px-4 md:px-6 text-center">
-        <div className="space-y-4">
-          <h2 className="text-3xl font-bold tracking-tighter text-primary-foreground md:text-4xl/tight">
-            Ready to Boost Your Business?
-          </h2>
-          <p className="max-w-[700px] mx-auto text-lg text-primary-foreground md:text-xl/relaxed">
-            Join Manoindia today and take your advertising to the next level.
-          </p>
-          <Link
-            href="#"
-            className="inline-flex h-10 items-center justify-center rounded-md bg-primary-foreground px-8 text-sm font-medium text-primary shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-            prefetch={false}
-          >
-            Sign Up Now
-          </Link>
-        </div>
-      </div>
-    </section>
-
-{/* FREQUENTLY ASKED QUESTIONS SECTION */}
-    <section className="w-full py-12 md:py-24 lg:py-32" id="faq">
-      <div className="container grid gap-12 px-4 md:px-6">
-        <div className="space-y-3 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Frequently Asked Questions</h2>
-          <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Get answers to your questions about the Manoindia platform.
-          </p>
-        </div>
-        <div className="grid gap-6">
-          <Collapsible>
-            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
-              What is Manoindia?
-              <ChevronDownIcon className="h-5 w-5 transition-transform" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="rounded-lg bg-muted dark:bg-card p-4 text-muted-foreground">
-              Manoindia is a leading digital advertising platform that connects businesses with their target audience.
-              It offers a wide range of advertising solutions, including display ads, video ads, and native ads, to help
-              businesses reach their marketing goals.
-            </CollapsibleContent>
-          </Collapsible>
-          <Collapsible>
-            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
-              How do I sign up for Manoindia?
-              <ChevronDownIcon className="h-5 w-5 transition-transform" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="rounded-lg bg-muted p-4 text-muted-foreground dark:bg-card">
-              Signing up for Manoindia is easy. Simply visit the Manoindia website and click on the "Sign Up" button.
-              You'll be prompted to enter your business information and create an account. Once your account is set up,
-              you can start creating and managing your advertising campaigns.
-            </CollapsibleContent>
-          </Collapsible>
-          <Collapsible>
-            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
-              What are the benefits of advertising on Manoindia?
-              <ChevronDownIcon className="h-5 w-5 transition-transform" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="rounded-lg bg-muted p-4 text-muted-foreground dark:bg-card">
-              Advertising on Manoindia offers a range of benefits for businesses, including:
-              <ul className="mt-4 list-disc space-y-2 pl-6">
-                <li>Targeted advertising to reach your ideal customers</li>
-                <li>Detailed analytics and reporting to track the performance of your campaigns</li>
-                <li>Flexible and cost-effective advertising solutions</li>
-                <li>Access to a large and engaged audience of Indian consumers</li>
-              </ul>
-            </CollapsibleContent>
-          </Collapsible>
-          <Collapsible>
-            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
-              What are the pricing packages for Manoindia?
-              <ChevronDownIcon className="h-5 w-5 transition-transform" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="rounded-lg bg-muted p-4 text-muted-foreground dark:bg-card">
-              Manoindia offers a range of pricing packages to suit the needs of businesses of all sizes:
-              <ul className="mt-4 list-disc space-y-2 pl-6">
-                <li>Starter Package: ₹5,000/month - Ideal for small businesses and startups</li>
-                <li>Professional Package: ₹15,000/month - Suitable for medium-sized businesses</li>
-                <li>Enterprise Package: ₹50,000/month - Designed for large businesses and corporations</li>
-                <li>Custom Packages: Tailored solutions for specific business requirements</li>
-              </ul>
-              All packages include a range of features, such as ad creation, targeting, and performance tracking.
-              Contact our sales team for more information on the best package for your business.
-            </CollapsibleContent>
-          </Collapsible>
-          <Collapsible>
-            <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
-              How can businesses get started with Manoindia?
-              <ChevronDownIcon className="h-5 w-5 transition-transform" />
-            </CollapsibleTrigger>
-            <CollapsibleContent className="rounded-lg bg-muted p-4 text-muted-foreground dark:bg-card">
-              To get started with Manoindia, businesses can follow these simple steps:
-              <ol className="mt-4 list-decimal space-y-2 pl-6">
-                <li>Visit the Manoindia website and click on the "Sign Up" button</li>
-                <li>Fill out the registration form with your business details</li>
-                <li>Choose the pricing package that best fits your advertising needs</li>
-                <li>Create and launch your first advertising campaign</li>
-                <li>Monitor your campaign performance and adjust your strategy as needed</li>
-              </ol>
-              Our team of advertising experts is available to provide guidance and support throughout the process.
-              Contact us today to learn more about how Manoindia can help grow your business.
-            </CollapsibleContent>
-          </Collapsible>
-        </div>
-      </div>
-    </section>
-
-{/* FOOTER SECTION */}
-    <footer className="bg-muted py-12">
-      <div className="container max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Quick Links</h3>
-          <nav className="grid gap-2">
-            <Link href="#" className="hover:underline" prefetch={false}>
-              Home
-            </Link>
-            <Link href="#" className="hover:underline" prefetch={false}>
-              Features
-            </Link>
-            <Link href="#" className="hover:underline" prefetch={false}>
-              About
-            </Link>
-            <Link href="#" className="hover:underline" prefetch={false}>
-              Contact
-            </Link>
-            <Link href="#" className="hover:underline" prefetch={false}>
-              Privacy Policy
-            </Link>
-            <Link href="#" className="hover:underline" prefetch={false}>
-              Terms of Service
-            </Link>
-          </nav>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Contact</h3>
-          <div className="space-y-1">
-            <p>
-              <MailIcon className="w-4 h-4 inline-block mr-2" />
-              support@example.com
+      {/* CALL TO ACTION SECTION */}
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-primary to-secondary">
+        <div className="container px-4 md:px-6 text-center">
+          <div className="space-y-4">
+            <h2 className="text-3xl font-bold tracking-tighter text-primary-foreground md:text-4xl/tight">
+              Ready to Boost Your Business?
+            </h2>
+            <p className="max-w-[700px] mx-auto text-lg text-primary-foreground md:text-xl/relaxed">
+              Join Manoindia today and take your advertising to the next level.
             </p>
-            <p>
-              <PhoneIcon className="w-4 h-4 inline-block mr-2" />
-              +1 (555) 123-4567
-            </p>
-            <div className="flex space-x-2">
-              <Link href="#" className="hover:text-primary" prefetch={false}>
-                <TwitterIcon className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-primary" prefetch={false}>
-                <FacebookIcon className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-primary" prefetch={false}>
-                <InstagramIcon className="w-5 h-5" />
-              </Link>
-              <Link href="#" className="hover:text-primary" prefetch={false}>
-                <LinkedinIcon className="w-5 h-5" />
-              </Link>
-            </div>
+            <Link
+              href="#"
+              className="inline-flex h-10 items-center justify-center rounded-md bg-primary-foreground px-8 text-sm font-medium text-primary shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+              prefetch={false}
+            >
+              Sign Up Now
+            </Link>
           </div>
         </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">Newsletter</h3>
-          <p>Subscribe to our newsletter for updates and tips.</p>
-          <form className="flex gap-2">
-            <Input type="email" placeholder="Enter your email" className="flex-1" />
-            <Button type="submit">Subscribe</Button>
-          </form>
+      </section>
+
+      {/* FREQUENTLY ASKED QUESTIONS SECTION */}
+      <section className="w-full py-12 md:py-24 lg:py-32" id="faq">
+        <div className="container grid gap-12 px-4 md:px-6">
+          <div className="space-y-3 text-center">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Frequently Asked Questions</h2>
+            <p className="max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              Get answers to your questions about the Manoindia platform.
+            </p>
+          </div>
+          <div className="grid gap-6">
+            <Collapsible>
+              <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
+                What is Manoindia?
+                <ChevronDownIcon className="h-5 w-5 transition-transform" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="rounded-lg bg-muted dark:bg-card p-4 text-muted-foreground">
+                Manoindia is a leading digital advertising platform that connects businesses with their target audience.
+                It offers a wide range of advertising solutions, including display ads, video ads, and native ads, to help
+                businesses reach their marketing goals.
+              </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+              <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
+                How do I sign up for Manoindia?
+                <ChevronDownIcon className="h-5 w-5 transition-transform" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="rounded-lg bg-muted p-4 text-muted-foreground dark:bg-card">
+                Signing up for Manoindia is easy. Simply visit the Manoindia website and click on the "Sign Up" button.
+                You'll be prompted to enter your business information and create an account. Once your account is set up,
+                you can start creating and managing your advertising campaigns.
+              </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+              <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
+                What are the benefits of advertising on Manoindia?
+                <ChevronDownIcon className="h-5 w-5 transition-transform" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="rounded-lg bg-muted p-4 text-muted-foreground dark:bg-card">
+                Advertising on Manoindia offers a range of benefits for businesses, including:
+                <ul className="mt-4 list-disc space-y-2 pl-6">
+                  <li>Targeted advertising to reach your ideal customers</li>
+                  <li>Detailed analytics and reporting to track the performance of your campaigns</li>
+                  <li>Flexible and cost-effective advertising solutions</li>
+                  <li>Access to a large and engaged audience of Indian consumers</li>
+                </ul>
+              </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+              <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
+                What are the pricing packages for Manoindia?
+                <ChevronDownIcon className="h-5 w-5 transition-transform" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="rounded-lg bg-muted p-4 text-muted-foreground dark:bg-card">
+                Manoindia offers a range of pricing packages to suit the needs of businesses of all sizes:
+                <ul className="mt-4 list-disc space-y-2 pl-6">
+                  <li>Starter Package: ₹5,000/month - Ideal for small businesses and startups</li>
+                  <li>Professional Package: ₹15,000/month - Suitable for medium-sized businesses</li>
+                  <li>Enterprise Package: ₹50,000/month - Designed for large businesses and corporations</li>
+                  <li>Custom Packages: Tailored solutions for specific business requirements</li>
+                </ul>
+                All packages include a range of features, such as ad creation, targeting, and performance tracking.
+                Contact our sales team for more information on the best package for your business.
+              </CollapsibleContent>
+            </Collapsible>
+            <Collapsible>
+              <CollapsibleTrigger className="flex w-full items-center justify-between rounded-lg bg-background p-4 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180">
+                How can businesses get started with Manoindia?
+                <ChevronDownIcon className="h-5 w-5 transition-transform" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="rounded-lg bg-muted p-4 text-muted-foreground dark:bg-card">
+                To get started with Manoindia, businesses can follow these simple steps:
+                <ol className="mt-4 list-decimal space-y-2 pl-6">
+                  <li>Visit the Manoindia website and click on the "Sign Up" button</li>
+                  <li>Fill out the registration form with your business details</li>
+                  <li>Choose the pricing package that best fits your advertising needs</li>
+                  <li>Create and launch your first advertising campaign</li>
+                  <li>Monitor your campaign performance and adjust your strategy as needed</li>
+                </ol>
+                Our team of advertising experts is available to provide guidance and support throughout the process.
+                Contact us today to learn more about how Manoindia can help grow your business.
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
         </div>
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold">About Us</h3>
-          <p>We are a team of passionate designers and developers creating beautiful and functional products.</p>
+      </section>
+
+      {/* FOOTER SECTION */}
+      <footer className="bg-muted py-12">
+        <div className="container max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold">Quick Links</h3>
+            <nav className="grid gap-2">
+              <Link href="#" className="hover:underline" prefetch={false}>
+                Home
+              </Link>
+              <Link href="#" className="hover:underline" prefetch={false}>
+                Features
+              </Link>
+              <Link href="#" className="hover:underline" prefetch={false}>
+                About
+              </Link>
+              <Link href="#" className="hover:underline" prefetch={false}>
+                Contact
+              </Link>
+              <Link href="#" className="hover:underline" prefetch={false}>
+                Privacy Policy
+              </Link>
+              <Link href="#" className="hover:underline" prefetch={false}>
+                Terms of Service
+              </Link>
+            </nav>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold">Contact</h3>
+            <div className="space-y-1">
+              <p>
+                <MailIcon className="w-4 h-4 inline-block mr-2" />
+                support@example.com
+              </p>
+              <p>
+                <PhoneIcon className="w-4 h-4 inline-block mr-2" />
+                +1 (555) 123-4567
+              </p>
+              <div className="flex space-x-2">
+                <Link href="#" className="hover:text-primary" prefetch={false}>
+                  <TwitterIcon className="w-5 h-5" />
+                </Link>
+                <Link href="#" className="hover:text-primary" prefetch={false}>
+                  <FacebookIcon className="w-5 h-5" />
+                </Link>
+                <Link href="#" className="hover:text-primary" prefetch={false}>
+                  <InstagramIcon className="w-5 h-5" />
+                </Link>
+                <Link href="#" className="hover:text-primary" prefetch={false}>
+                  <LinkedinIcon className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold">Newsletter</h3>
+            <p>Subscribe to our newsletter for updates and tips.</p>
+            <form className="flex gap-2">
+              <Input type="email" placeholder="Enter your email" className="flex-1" />
+              <Button type="submit">Subscribe</Button>
+            </form>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold">About Us</h3>
+            <p>We are a team of passionate designers and developers creating beautiful and functional products.</p>
+          </div>
         </div>
-      </div>
-      <div className="container max-w-7xl mt-8 text-center text-sm text-muted-foreground">
-        &copy; 2024 Example Inc. All rights reserved.
-      </div>
-    </footer>
+        <div className="container max-w-7xl mt-8 text-center text-sm text-muted-foreground">
+          &copy; 2024 Example Inc. All rights reserved.
+        </div>
+      </footer>
     </>
   )
 }
@@ -665,7 +665,7 @@ function Homepage() {
 
 // SVG ICONS
 
-function ChevronDownIcon(props:any) {
+function ChevronDownIcon(props: any) {
   return (
     <svg
       {...props}
@@ -685,7 +685,7 @@ function ChevronDownIcon(props:any) {
 }
 
 
-function XIcon(props:any) {
+function XIcon(props: any) {
   return (
     <svg
       {...props}
@@ -705,7 +705,7 @@ function XIcon(props:any) {
   )
 }
 
-function CalendarIcon(props:any) {
+function CalendarIcon(props: any) {
   return (
     <svg
       {...props}
@@ -728,7 +728,7 @@ function CalendarIcon(props:any) {
 }
 
 
-function MountainIcon(props:any) {
+function MountainIcon(props: any) {
   return (
     <svg
       {...props}
@@ -748,7 +748,7 @@ function MountainIcon(props:any) {
 }
 
 
-function PaletteIcon(props:any) {
+function PaletteIcon(props: any) {
   return (
     <svg
       {...props}
@@ -772,7 +772,7 @@ function PaletteIcon(props:any) {
 }
 
 
-function PhoneIcon(props:any) {
+function PhoneIcon(props: any) {
   return (
     <svg
       {...props}
@@ -792,7 +792,7 @@ function PhoneIcon(props:any) {
 }
 
 
-function RocketIcon(props:any) {
+function RocketIcon(props: any) {
   return (
     <svg
       {...props}
@@ -815,7 +815,7 @@ function RocketIcon(props:any) {
 }
 
 
-function SearchIcon(props:any) {
+function SearchIcon(props: any) {
   return (
     <svg
       {...props}
@@ -836,7 +836,7 @@ function SearchIcon(props:any) {
 }
 
 
-function SlidersVerticalIcon(props:any) {
+function SlidersVerticalIcon(props: any) {
   return (
     <svg
       {...props}
@@ -864,7 +864,7 @@ function SlidersVerticalIcon(props:any) {
 }
 
 
-function StarIcon(props:any) {
+function StarIcon(props: any) {
   return (
     <svg
       {...props}
@@ -884,7 +884,7 @@ function StarIcon(props:any) {
 }
 
 
-function UploadIcon(props:any) {
+function UploadIcon(props: any) {
   return (
     <svg
       {...props}
@@ -906,7 +906,7 @@ function UploadIcon(props:any) {
 }
 
 
-function FacebookIcon(props:any) {
+function FacebookIcon(props: any) {
   return (
     <svg
       {...props}
@@ -926,7 +926,7 @@ function FacebookIcon(props:any) {
 }
 
 
-function InstagramIcon(props:any) {
+function InstagramIcon(props: any) {
   return (
     <svg
       {...props}
@@ -948,7 +948,7 @@ function InstagramIcon(props:any) {
 }
 
 
-function LinkedinIcon(props:any) {
+function LinkedinIcon(props: any) {
   return (
     <svg
       {...props}
@@ -970,7 +970,7 @@ function LinkedinIcon(props:any) {
 }
 
 
-function MailIcon(props:any) {
+function MailIcon(props: any) {
   return (
     <svg
       {...props}
@@ -992,7 +992,7 @@ function MailIcon(props:any) {
 
 
 
-function TwitterIcon(props:any) {
+function TwitterIcon(props: any) {
   return (
     <svg
       {...props}
@@ -1011,7 +1011,7 @@ function TwitterIcon(props:any) {
   )
 }
 
-function MenuIcon(props:any) {
+function MenuIcon(props: any) {
   return (
     <svg
       {...props}

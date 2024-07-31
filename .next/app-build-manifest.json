@@ -11,70 +11,35 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/login/page": [
+    "/not-found": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/login/page.js"
+      "static/chunks/app/not-found.js"
     ],
-    "/login/layout": [
+    "/(root)/(home)/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/login/layout.js"
+      "static/chunks/app/(root)/(home)/dashboard/page.js"
     ],
-    "/dashboard/page": [
+    "/(root)/(home)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/page.js"
+      "static/chunks/app/(root)/(home)/layout.js"
     ],
-    "/dashboard/layout": [
+    "/[...not_found]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/layout.js"
+      "static/chunks/app/[...not_found]/page.js"
     ],
-    "/dashboard/ads/page": [
+    "/(root)/(home)/ads/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/ads/page.js"
+      "static/chunks/app/(root)/(home)/ads/page.js"
     ],
-    "/dashboard/ads/layout": [
+    "/(root)/(home)/ads/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/ads/layout.js"
-    ],
-    "/dashboard/managment/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/managment/page.js"
-    ],
-    "/dashboard/managment/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/managment/layout.js"
-    ],
-    "/dashboard/blog/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/blog/page.js"
-    ],
-    "/dashboard/blog/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/blog/layout.js"
-    ],
-    "/dashboard/user/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/user/page.js"
-    ],
-    "/dashboard/user/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/user/layout.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/(root)/(home)/ads/layout.js"
     ]
   }
 }

@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Button } from "../../components/ui/button"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -8,7 +8,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../components/ui/card"
+} from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
@@ -17,8 +17,8 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
-import { Input } from "../../components/ui/input"
-import { Label } from "../../components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { WobbleCardDemo } from '@/components/WobbleCardDemo'
 import { WobbleCard } from '@/components/ui/wobble-card'
 import { AppleCardsCarouselDemo } from '@/components/AppleCardsCarouselDemo'

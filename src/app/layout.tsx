@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ui/theme-provider"
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { dark, shadesOfPurple } from '@clerk/themes';
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider
+    appearance={{
+      baseTheme: [dark, shadesOfPurple]
+    }}
+    >
     <html lang="en">
       <body className={inter.className}>
-        
+      <header>
+      </header>
       <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -29,5 +38,6 @@ export default function RootLayout({
           </ThemeProvider>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

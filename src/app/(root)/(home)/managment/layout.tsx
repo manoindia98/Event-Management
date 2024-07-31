@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { PlaceholdersAndVanishInput } from "../../../components/ui/placeholders-and-vanish-input"
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input"
 
 export default function DashboardLayout({
   children, // will be a page or nested layout
