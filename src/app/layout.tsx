@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ui/theme-provider"
 import { Inter } from "next/font/google";
 import "./globals.css";
-<<<<<<< HEAD
 import { Toaster } from 'react-hot-toast';
-=======
 import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { dark, shadesOfPurple } from '@clerk/themes';
->>>>>>> Ankit
+
 
 
 const inter = Inter({ subsets: ["latin"] });
