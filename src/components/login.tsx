@@ -47,25 +47,6 @@ export function Login() {
     </div>
   )
 }
-function TwitterIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M23 3a10.7 10.7 0 0 1-3.09.84 5.28 5.28 0 0 0 2.31-2.91 10.5 10.5 0 0 1-3.35 1.27A5.23 5.23 0 0 0 16.15 2c-2.9 0-5.26 2.36-5.26 5.26 0 .41.05.82.1 1.22A14.9 14.9 0 0 1 3.35 4.4 5.22 5.22 0 0 0 3.16 7.2c0 3.63 2.84 6.6 6.6 6.6a5.27 5.27 0 0 1-2.38.09 5.24 5.24 0 0 0 4.9 3.63A10.48 10.48 0 0 1 2 19.15a14.9 14.9 0 0 0 8.05 2.37c9.66 0 15-8.02 15-15v-.68A10.4 10.4 0 0 0 23 3z" />
-    </svg>
-  )
-}
-
 
 function ChromeIcon(props:any) {
   return (
