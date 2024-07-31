@@ -92,7 +92,6 @@ export default function Signup() {
                 value={email}
                 onChange={handleOnChange}
                 type="email"
-              required
                 placeholder="abc@example.com" />
           </div>
           <div className="space-y-2 relative">
