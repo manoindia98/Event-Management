@@ -1,61 +1,49 @@
-import React, { useState } from 'react';
+"use client"
 
-interface Artist {
-  name: string;
-  genre: string;
-}
+import React from 'react'
+import Artcard  from '@/components/artcard';
 
-function Page() {
-  // State to manage the list of artists
-  const [artists, setArtists] = useState<Artist[]>([]);
-  // State to manage form inputs
-  const [artistName, setArtistName] = useState<string>('');
-  const [artistGenre, setArtistGenre] = useState<string>('');
 
-  // Handler to add a new artist
-  const addArtist = () => {
-    if (artistName && artistGenre) {
-      setArtists([...artists, { name: artistName, genre: artistGenre }]);
-      setArtistName('');
-      setArtistGenre('');
-    } else {
-      alert('Please fill in both fields');
-    }
-  };
+const adServicess = [
+  {
+    title: "Premium Banner Ad",
+    description: "Get your advertisement prominently displayed on our homepage banner.",
+    price: 5000
+  },
+  {
+    title: "Sidebar Ad Slot",
+    description: "Your ad will appear on the sidebar of our most visited pages.",
+    price: 3000
+  },
+  {
+    title: "Footer Ad Placement",
+    description: "Showcase your ad in the footer section across all pages.",
+    price: 2000
+  },
+  {
+    title: "Popup Ad Campaign",
+    description: "Engage users with interactive pop-up ads.",
+    price: 7000
+  },
+  {
+    title: "Video Ad Feature",
+    description: "Feature your video advertisement before our content videos.",
+    price: 10000
+  }
+];
 
+function page() {
   return (
-    <div className='h-full'>
-      <div>Upcoming Event</div>
-      <div>Event Packages</div>
-      <div>List of Halls Available to Book</div>
-
-      <div>
-        <h2>Add Artist</h2>
-        <input
-          type='text'
-          placeholder='Artist Name'
-          value={artistName}
-          onChange={(e) => setArtistName(e.target.value)}
-        />
-        <input
-          type='text'
-          placeholder='Artist Genre'
-          value={artistGenre}
-          onChange={(e) => setArtistGenre(e.target.value)}
-        />
-        <button onClick={addArtist}>Add Artist</button>
-      </div>
-
-      <div>
-        <h2>Artists List</h2>
-        <ul>
-          {artists.map((artist, index) => (
-            <li key={index}>{`${artist.name} - ${artist.genre}`}</li>
+  
+      <div className='flex flex-wrap'>
+          {adServicess.map((service)=> (
+              <Artcard title={service.title} price={service.price} description={service.description} />
           ))}
-        </ul>
+          
+          
       </div>
-    </div>
-  );
+
+  )
 }
 
-export default Page;
+export default page;
