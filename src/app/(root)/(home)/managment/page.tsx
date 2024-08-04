@@ -7,12 +7,12 @@ import Artcard  from '@/components/artcard';
 const adServicess = [
   {
     title: "Mehndi Artist",
-    description: "A mehndi artist will intricate and decorative henna designs on reasonable rate.",
+    description: "Mehndi artist will intricate and decorative henna designs on reasonable rate.",
     price: 5000
   },
   {
-    title: "Sidebar Ad Slot",
-    description: "Your ad will appear on the sidebar of our most visited pages.",
+    title: "Makeup Artist",
+    description: "Makeup artist Will enhances and transforms appearances using cosmetics and techniques to achieve desired looks.",
     price: 3000
   },
   {
