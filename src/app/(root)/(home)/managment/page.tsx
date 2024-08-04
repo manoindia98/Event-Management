@@ -21,8 +21,8 @@ const adServicess = [
     price: 2000
   },
   {
-    title: "Popup Ad Campaign",
-    description: "Engage users with interactive pop-up ads.",
+    title: "Social Media Influncer",
+    description: "Engage users with interactive posts.",
     price: 7000
   },
   {
