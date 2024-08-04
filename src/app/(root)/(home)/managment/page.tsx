@@ -16,8 +16,8 @@ const adServicess = [
     price: 3000
   },
   {
-    title: "Footer Ad Placement",
-    description: "Showcase your ad in the footer section across all pages.",
+    title: "Photographer",
+    description: "A photographer captures moments and scenes through the lens to create lasting visual memories.",
     price: 2000
   },
   {
