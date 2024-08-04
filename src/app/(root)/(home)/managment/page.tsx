@@ -6,8 +6,8 @@ import Artcard  from '@/components/artcard';
 
 const adServicess = [
   {
-    title: "Premium Banner Ad",
-    description: "Get your advertisement prominently displayed on our homepage banner.",
+    title: "Mehndi Artist",
+    description: "A mehndi artist will intricate and decorative henna designs on reasonable rate.",
     price: 5000
   },
   {
