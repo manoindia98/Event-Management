@@ -90,7 +90,9 @@ const page: React.FC = () => {
     fetchProductData();
   }, []);
 
+
   return (
+
     <div className='h-full'>
       <div>upcoming event</div>
       <div>Event Packages</div>
@@ -160,3 +162,4 @@ const page: React.FC = () => {
 }
 
 export default page
+
